@@ -1,0 +1,5 @@
+streamlit==0.83.0
+pandas==1.2.4
+os==5.4.0
+fpdf==1.7.2
+base64==2.1.0
