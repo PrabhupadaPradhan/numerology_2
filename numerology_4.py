@@ -143,7 +143,7 @@ def plus_9_1(d, add):
     b = d[1]
     c = d[2] + add
     return '/'.join([str(a), str(b), str(c)])
-keyword = ['New Starts, Enthusiasm, Energy', 'Patient Waiting', 'PLeasant, Happy, Carefree', 'Hard Work, Goals Achieved', 'Change, Variety, Expect The Unexpected', 'Home And Family', 'Learning, Wisdom, Inner Development', 'Money, Rewards', 'Revaluation, Letting Go, Looking Ahead']
+keyword = ['New Starts, Enthusiasm, Energy', 'Patient Waiting', 'Pleasant, Happy, Carefree', 'Hard Work, Goals Achieved', 'Change, Variety, Expect The Unexpected', 'Home And Family', 'Learning, Wisdom, Inner Development', 'Money, Rewards', 'Revaluation, Letting Go, Looking Ahead']
 export_as_pdf = st.button("create PDF")
 if export_as_pdf:
     for item in name_dict:
