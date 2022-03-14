@@ -156,7 +156,7 @@ if export_as_pdf:
             name = df["Name"][i]
             a_life_pn = sum([int(j) for j in (str(a_date).split(' '))[0].split('-')])
             while a_life_pn >= 10:
-                a_life_pn = sum([int(k) for k in str(life_pn)])
+                a_life_pn = sum([int(k) for k in str(a_life_pn)])
             date = str(a_date).split(' ')[0].split('-')
             if a_life_pn == 2 or a_life_pn == 4:
                 date = sum([int(i) for i in date])
