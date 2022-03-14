@@ -41,7 +41,7 @@ def lo_shu(date):
         list_1.append(count)
     output = [str(i) * list_1[i - 1] for i in range(1, 10)]
     return output
-lo_shu(date_1)
+st.title(lo_shu(date_1))
 x = life_pn_func(date_1)
 y = life_pn_func(date_2)
 compat = compatability(x, y)
