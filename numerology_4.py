@@ -41,10 +41,15 @@ def lo_shu(date):
         list_1.append(count)
     output = [str(i) * list_1[i - 1] for i in range(1, 10)]
     return output
-st.title(lo_shu(date_1))
 x = life_pn_func(date_1)
 y = life_pn_func(date_2)
 compat = compatability(x, y)
 st.title(f"COMPATABILITY : {compat}")
-df = pd.DataFrame({" " : ["Mental Level", "Emotional Level", "Practical Level"], "Thought Level" : [33, 0, 1], "Will Power and Determination Level" : [0, 5, 0], "Action Level" : [9, 8, 0]})
-st.table(df)
+st.title(f"LO SHU grid for {name_1}")
+a = lo_shu(date_1)
+df_1 = pd.DataFrame({" " : ["Mental Level", "Emotional Level", "Practical Level"], "Thought Level" : [a[3], a[2], a[1]], "Will Power and Determination Level" : [a[6], a[5], a[4]], "Action Level" : [a[9], a[8], a[7]]})
+st.table(df_1)
+st.title(f"LO SHU grid for {name_2}")
+a = lo_shu(date_2)
+df_2 = pd.DataFrame({" " : ["Mental Level", "Emotional Level", "Practical Level"], "Thought Level" : [a[3], a[2], a[1]], "Will Power and Determination Level" : [a[6], a[5], a[4]], "Action Level" : [a[9], a[8], a[7]]})
+st.table(df_2)
