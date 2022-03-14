@@ -34,11 +34,4 @@ y = life_pn_func(date_2)
 compat = compatability(x, y)
 st.title(f"COMPATABILITY : {compat}")
 df = pd.DataFrame({" " : ["Mental Level", "Emotional Level", "Practical Level"], "Thought Level" : [33, 0, 1], "Will Power and Determination Level" : [0, 5, 0], "Action Level" : [9, 8, 0]})
-'''hide_table_row_index = """
-            <style>
-            tbody th {display:none}
-            .blank {display:none}
-            </style>
-            """'''
-#st.markdown(hide_table_row_index, unsafe_allow_html=True)
 st.table(df)
