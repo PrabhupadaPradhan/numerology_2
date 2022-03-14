@@ -19,9 +19,7 @@ def compatability(x, y):
         return "D"
 def life_pn_func(date_1):
     date_1 = "-".join((date_1.split("/"))[::-1])
-    st.title(date_1)
     life_pn = sum([int(j) for j in (date_1.split(' '))[0].split('-')])
-    st.title(life_pn)
     while life_pn >= 10:
         life_pn = sum([int(k) for k in str(life_pn)])
     date = date_1.split(' ')[0].split('-')
