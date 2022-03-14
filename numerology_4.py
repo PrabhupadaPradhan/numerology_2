@@ -1,12 +1,17 @@
 import streamlit as st
 import base64
+import datetime as dt
 def create_download_link(val, filename):
     b64 = base64.b64encode(val)
     return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="{filename}.pdf">Download file</a>'
 st.title("NUMEROLOGY APP(Copyright © 2021 Prabhupada Pradhan ALL RIGHTS RESERVED)")
 name_org = st.text_input("Please enter your name:- ")
 date_org = st.text_input("Please enter your date of birth:- ")
+a_date = st.text_input("Please enter another date of birth to check compatability:- ")
+dob = [i for i in date_org.split("/")]
 date_org = "-".join((date_org.split("/"))[::-1]) + " 00:00:00"
+a_dob = [i for i in a_date.split("/")]
+a_date = "-".join((a_date.split("/"))[::-1]) + " 00:00:00"
 pdf_name = "trial_1"
 import pandas as pd
 from fpdf import FPDF
@@ -149,6 +154,16 @@ if export_as_pdf:
     for item in name_dict:
         for i in range(df.shape[0]):
             name = df["Name"][i]
+            a_life_pn = sum([int(j) for j in (str(a_date).split(' '))[0].split('-')])
+            while a_life_pn >= 10:
+                a_life_pn = sum([int(k) for k in str(life_pn)])
+            date = str(a_date).split(' ')[0].split('-')
+            if a_life_pn == 2 or a_life_pn == 4:
+                date = sum([int(i) for i in date])
+                date = sum([int(i) for i in str(date)])
+                if date in [2, 4, 11, 22]:
+                    a_life_pn = date
+            st.title(str(a_life_pn))
             life_pn = sum([int(j) for j in (str(df['Date'][i]).split(' '))[0].split('-')])
             while life_pn >= 10:
                 life_pn = sum([int(k) for k in str(life_pn)])
@@ -288,8 +303,29 @@ if export_as_pdf:
                 pdf.cell(200, 2 * h, txt = "PART C:-", ln = line, align = 'L')
                 line += 1
                 pdf.cell(200, h, txt = "MAJOR PERIODS / CYCLES: ", ln = line, align = 'L')
+                reference = []
                 for e in range(len(major_p)):
                     line += 1
                     pdf.cell(200, h, txt = str(str(e + 1) + '. ' + plus_9(date, add = major_p[e][0] - list_of_add[e]) + " till " + str(major_p[e][0]) + " " + plus_9_1(date, add = major_p[e][0]) + " " + str(major_p[e][1]) + " " + keyword[major_p[e][1] - 1]), ln = line, align = 'L')
+                    reference.append(int(plus_9(date, add = major_p[e][0] - list_of_add[e]).split("/")[-1]))
+                year = int(dt.date.today().year)
+                result = (int(dob[0]) + int(dob[1]) + int(year)) % 9
+                final_list = []
+                months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+                for i in range(13):
+                    list_1 = [str(months[j]) + " " + str(year + i) + " " + str((int(result) + i + j) % 9 + 1) + " " + str(keyword[(int(result) + i + j) % 9]) for j in range(12)]
+                    final_list.append(list_1)
+                count = 0
+                line += 1
+                pdf.cell(200, h, txt = " ", ln = line, align = "L")
+                for i in final_list:
+                    line += 1
+                    pdf.cell(200, h, txt = str(str(year + count) + " " + str(keyword[(int(result) + count) % 9 - 1])), ln = line, align = 'L')
+                    for j in i:
+                        line += 1
+                        pdf.cell(200, h, txt = j, ln = line, align = 'L')
+                    line += 1
+                    pdf.cell(200, h, txt = " ", ln = line, align = 'L')
+                    count += 1
         html = create_download_link(pdf.output(dest="S").encode("latin-1"), "numerology")
         st.markdown(html, unsafe_allow_html=True)
