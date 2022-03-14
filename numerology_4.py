@@ -29,6 +29,19 @@ def life_pn_func(date_1):
         if date in [2, 4, 11, 22]:
             life_pn = date
     return life_pn
+def lo_shu(date):
+    date = ''.join(date.split("/"))
+    date = [int(i) for i in date]
+    list_1 = []
+    for i in range(1, 10):
+        count = 0
+        for j in date:
+            if j == i:
+                count += 1
+        list_1.append(count)
+    output = [str(i) * list_1[i - 1] for i in range(1, 10)]
+    return output
+lo_shu(date_1)
 x = life_pn_func(date_1)
 y = life_pn_func(date_2)
 compat = compatability(x, y)
